@@ -15,6 +15,8 @@
 		F0AB3310255AD551007D7601 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0AB330E255AD551007D7601 /* LaunchScreen.storyboard */; };
 		F0AB331B255AD551007D7601 /* GPA_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AB331A255AD551007D7601 /* GPA_CalculatorTests.swift */; };
 		F0AB3326255AD551007D7601 /* GPA_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AB3325255AD551007D7601 /* GPA_CalculatorUITests.swift */; };
+		F0E4F618256101E3005E3108 /* customViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F617256101E3005E3108 /* customViewController.swift */; };
+		F0E4F61D2561105A005E3108 /* presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F61C2561105A005E3108 /* presets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		F0AB3321255AD551007D7601 /* GPA CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GPA CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AB3325255AD551007D7601 /* GPA_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPA_CalculatorUITests.swift; sourceTree = "<group>"; };
 		F0AB3327255AD551007D7601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0E4F6132560E9CA005E3108 /* GPA Calculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GPA Calculator.entitlements"; sourceTree = "<group>"; };
+		F0E4F617256101E3005E3108 /* customViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customViewController.swift; sourceTree = "<group>"; };
+		F0E4F61C2561105A005E3108 /* presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +104,13 @@
 		F0AB3302255AD54F007D7601 /* GPA Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				F0E4F6132560E9CA005E3108 /* GPA Calculator.entitlements */,
 				F0AB3303255AD54F007D7601 /* AppDelegate.swift */,
 				F0AB3305255AD54F007D7601 /* SceneDelegate.swift */,
 				F0AB3307255AD54F007D7601 /* ViewController.swift */,
 				F0AB3309255AD54F007D7601 /* Main.storyboard */,
+				F0E4F61C2561105A005E3108 /* presets.swift */,
+				F0E4F617256101E3005E3108 /* customViewController.swift */,
 				F0AB330C255AD551007D7601 /* Assets.xcassets */,
 				F0AB330E255AD551007D7601 /* LaunchScreen.storyboard */,
 				F0AB3311255AD551007D7601 /* Info.plist */,
@@ -258,9 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0E4F61D2561105A005E3108 /* presets.swift in Sources */,
 				F0AB3308255AD54F007D7601 /* ViewController.swift in Sources */,
 				F0AB3304255AD54F007D7601 /* AppDelegate.swift in Sources */,
 				F0AB3306255AD54F007D7601 /* SceneDelegate.swift in Sources */,
+				F0E4F618256101E3005E3108 /* customViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "GPA Calculator/GPA Calculator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -446,12 +457,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michelguo.gpacalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -460,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "GPA Calculator/GPA Calculator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -470,12 +483,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michelguo.gpacalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
