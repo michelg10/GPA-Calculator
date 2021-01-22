@@ -50,6 +50,7 @@ public class Gradient: UIView {
 }
 var selP:preset?=nil
 class customViewController: UIViewController {
+    @IBOutlet weak var about: UILabel!
     var vwsa:[UIView]=[]
     var dsl = -1
     var prPrR=2
@@ -58,8 +59,21 @@ class customViewController: UIViewController {
     @IBOutlet weak var mainStk: UIStackView!
     var grads:[UIView]=[]
     override func viewDidLoad() {
+        about.textColor=UIColor.label
         selP=curP
         super.viewDidLoad()
+        var abtFont=UIFont.systemFont(ofSize: 16, weight: .medium)
+        var loves=["Maxie","Mimi","Sarah","Sophie"]
+        loves.shuffle()
+        var lovesStr=loves[0]
+        for i in 1..<loves.count {
+            lovesStr+=", "
+            if (i==loves.count-1) {
+                lovesStr+="and "
+            }
+            lovesStr+=loves[i]
+        }
+        about.text!+=" Special thanks to "+lovesStr+" for supporting my journey as a developer!"
         navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view.
         var mstrGrps=Int(ceil(Double(presets.count)/Double(prPrR)))
@@ -154,11 +168,11 @@ class customViewController: UIViewController {
                     vw.layer.cornerRadius=70.0/8
                 }
             }
-            mainStk.addArrangedSubview(nvw)
+            mainStk.insertArrangedSubview(nvw,at:i*2+1)
             if (i != mstrGrps-1) {
                 var plcv=UIView()
                 plcv.heightAnchor.constraint(equalToConstant: 13).isActive=true
-                mainStk.addArrangedSubview(plcv)
+                mainStk.insertArrangedSubview(plcv,at:i*2+2)
             }
         }
     }
@@ -189,10 +203,13 @@ class customViewController: UIViewController {
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
             
-            let stops=60
-            let dur=0.4
+            let fps=120.0
+            let totAdj=1.0
+            let totTime=0.4
+            //adjust totAdj in totTime with fps fps
             
-            let stopDur=dur/Double(stops)
+            let stops=Int(fps*totTime)
+            let stopDur=totTime/Double(stops)
             
             // animate tg to 100% opacity
             for i in 0..<wrkitms[tg].count {
@@ -202,9 +219,7 @@ class customViewController: UIViewController {
             //animate to 30
             for i in curOpa...stops {
                 var wi=DispatchWorkItem(block: { [self] in
-                    UIView.animate(withDuration:stopDur) {
-                        grads[tg].alpha=CGFloat(grads[tg].alpha+CGFloat(1.0/Double(stops)))
-                    }
+                    grads[tg].alpha=CGFloat(grads[tg].alpha+CGFloat(totAdj/Double(stops)))
                 })
                 wrkitms[tg].append(wi)
                 DispatchQueue.main.asyncAfter(deadline: .now()+Double(i-curOpa)*stopDur, execute: wi)
@@ -218,10 +233,7 @@ class customViewController: UIViewController {
             curOpa=Int(grads[curdsl].alpha*CGFloat(stops))
             for i in 0...curOpa {
                 var wi=DispatchWorkItem(block: { [self] in
-                    UIView.animate(withDuration:stopDur) {
-                        grads[curdsl].alpha=CGFloat(grads[curdsl].alpha-CGFloat(1.0/Double(stops)))
-                    }
-
+                    grads[curdsl].alpha=CGFloat(grads[curdsl].alpha-CGFloat(totAdj/Double(stops)))
                 })
                 wrkitms[curdsl].append(wi)
                 DispatchQueue.main.asyncAfter(deadline: .now()+Double(i)*stopDur, execute: wi)

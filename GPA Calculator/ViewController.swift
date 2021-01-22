@@ -33,14 +33,14 @@ struct mxSubjGrp {
     var subjs:[subj]
 }
 var curP:preset?
-var lgradstop:[Gradient]=[] // lgrad
-var lgradsbot:[Gradient]=[] // lgrad
+var lgradstop:[Gradient?]=[] // lgrad
+var lgradsbot:[Gradient?]=[] // lgrad
 struct bar {
     var lbound: Int
     var sc: Double
 }
 func loadDefaults() {
-    curP=presets[2]
+    curP=presets[4]
 }
 func findPreset(toF: String) {
     curP=nil
@@ -126,7 +126,7 @@ class ViewController: UIViewController {
         scrview.showsVerticalScrollIndicator=false
         editmsk.layer.masksToBounds=true
         editmsk.layer.cornerCurve = .continuous
-        editmsk.layer.cornerRadius=editmsk.layer.bounds.width/8
+        editmsk.layer.cornerRadius=editmsk.layer.bounds.height/2
         
         stk.layer.masksToBounds=true
         stk.layer.cornerCurve = .continuous
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
         resetmsk.clipsToBounds=true
         resetmsk.layer.masksToBounds=true
         resetmsk.layer.cornerCurve = .continuous
-        resetmsk.layer.cornerRadius=editmsk.layer.bounds.width/8
+        resetmsk.layer.cornerRadius=editmsk.layer.bounds.height/2
         
         //MARK: Load from user data
         if (usrdt.value(forKey:"dt")==nil||usrdt.value(forKey:"preset")==nil) {
@@ -174,7 +174,8 @@ class ViewController: UIViewController {
             updtc(segment:plcHldr)
         }
     }
-    
+    var mxObjCount=0
+    let cellhei=108
     func drawInter(doSave:Bool) {
         if (bottomPadding != nil) {
             bottomPadding!.removeFromSuperview()
@@ -187,15 +188,28 @@ class ViewController: UIViewController {
         for i in 0..<mxhdlr.count {
             mxhdlr[i].mstrView.removeFromSuperview()
         }
+        lstmax.removeAll()
         var ldobjs=curP!.enul()
-        let cellhei=108
+        mxObjCount=0
+        if (curP!.mxSubs != nil) {
+            for i in 0..<curP!.mxSubs!.count {
+                mxObjCount+=curP!.mxSubs![i].subjs.count
+            }
+            alphTr=[[DispatchWorkItem]](repeating: [], count: mxObjCount)
+            lstmax=[Int](repeating:0, count:curP!.mxSubs!.count)
+            gradTr=[[DispatchWorkItem]](repeating:[], count:curP!.mxSubs!.count)
+            gradPos=[Double](repeating: 0, count: curP!.mxSubs!.count)
+            for i in 0..<curP!.mxSubs!.count {
+                lstmax[i] = -1
+            }
+        }
         var paren:mxView? = nil
         let gradw=7
         lgradstop.removeAll()
         lgradsbot.removeAll()
         if (curP!.mxSubs != nil) {
-            lgradstop.reserveCapacity(curP!.mxSubs!.count)
-            lgradsbot.reserveCapacity(curP!.mxSubs!.count)
+            lgradstop=[Gradient?](repeating: nil, count: curP!.mxSubs!.count)
+            lgradsbot=[Gradient?](repeating: nil, count: curP!.mxSubs!.count)
         }
         for i in 0..<ldobjs.count {
             if (ldobjs[i].locc==loc.mxg) {
@@ -260,6 +274,15 @@ class ViewController: UIViewController {
                     subjlbl.font=UIFont.systemFont(ofSize:25)
                     subjlbl.topAnchor.constraint(equalTo: subjcont.topAnchor, constant: 15).isActive=true
                     subjlbl.leadingAnchor.constraint(equalTo: subjcont.leadingAnchor, constant: CGFloat(10-gradw)).isActive=true
+                    subjlbl.textColor=UIColor.init(named:"deselText")
+                    
+                    subjlbl=UILabel()
+                    subjlbl.translatesAutoresizingMaskIntoConstraints=false
+                    subjlbl.text=curP!.mxSubs![ldobjs[i].ind].subjs[j].nm
+                    subjcont.addSubview(subjlbl)
+                    subjlbl.font=UIFont.systemFont(ofSize:25)
+                    subjlbl.topAnchor.constraint(equalTo: subjcont.topAnchor, constant: 15).isActive=true
+                    subjlbl.leadingAnchor.constraint(equalTo: subjcont.leadingAnchor, constant: CGFloat(10-gradw)).isActive=true
                     amx.subjlbl=subjlbl
                     
                     var lvlsel=UISegmentedControl()
@@ -304,6 +327,21 @@ class ViewController: UIViewController {
                 gradMsk.layer.cornerRadius=1.5
                 gradMsk.clipsToBounds=true
                 
+                var botgrad=Gradient()
+                botgrad.translatesAutoresizingMaskIntoConstraints=false
+                botgrad.diagonalMode=false
+                gradMsk.addSubview(botgrad)
+                botgrad.widthAnchor.constraint(equalToConstant: 3).isActive=true
+                botgrad.topAnchor.constraint(equalTo: gradCont.topAnchor, constant: 17).isActive=true
+                botgrad.bottomAnchor.constraint(equalTo: gradCont.bottomAnchor, constant: -15).isActive=true
+                botgrad.leadingAnchor.constraint(equalTo: gradCont.leadingAnchor, constant: 3).isActive=true
+                botgrad.clipsToBounds=true
+                botgrad.startColor=UIColor.init(named:"gradProm")!
+                botgrad.endColor=UIColor.init(named:"gradDesel")!
+                botgrad.updt()
+                lgradsbot[ldobjs[i].ind]=botgrad
+                
+                //MARK: Upgrad
                 var upgrad=Gradient()
                 upgrad.translatesAutoresizingMaskIntoConstraints=false
                 upgrad.diagonalMode=false
@@ -318,19 +356,7 @@ class ViewController: UIViewController {
                 var upgradMsk=UIView(frame: CGRect(x: 0,y: 0,width: 4,height: 0))
                 upgradMsk.backgroundColor = .black
                 upgrad.mask=upgradMsk
-                
-                var botgrad=Gradient()
-                botgrad.translatesAutoresizingMaskIntoConstraints=false
-                botgrad.diagonalMode=false
-                gradMsk.addSubview(botgrad)
-                botgrad.widthAnchor.constraint(equalToConstant: 3).isActive=true
-                botgrad.topAnchor.constraint(equalTo: gradCont.topAnchor, constant: 17).isActive=true
-                botgrad.bottomAnchor.constraint(equalTo: gradCont.bottomAnchor, constant: -15).isActive=true
-                botgrad.leadingAnchor.constraint(equalTo: gradCont.leadingAnchor, constant: 3).isActive=true
-                botgrad.clipsToBounds=true
-                botgrad.startColor=UIColor.init(named:"gradProm")!
-                botgrad.endColor=UIColor.init(named:"gradDesel")!
-                botgrad.updt()
+                lgradstop[ldobjs[i].ind]=upgrad
                 
                 continue
             }
@@ -417,7 +443,13 @@ class ViewController: UIViewController {
         bottomPadding=botBuf
         stk.addArrangedSubview(botBuf)
     }
+    // process: lstmx keeps track of transition item one and alphTr provides a way to keep track of tasks to cancel them
+    var alphTr:[[DispatchWorkItem]]=[[]]
+    var lstmax:[Int]=[] //lstsel: what was the last maximum
+    var gradTr:[[DispatchWorkItem]]=[[]]
+    var gradPos:[Double]=[]
     @objc func updtc(segment: UISegmentedControl) {
+        print("-----GPA COMPUTE-----")
         assert(curP != nil,"Preset is nil while running evaluation!")
         saveData()
         if (segment != plcHldr) {
@@ -439,19 +471,36 @@ class ViewController: UIViewController {
         var ttlCred=0.0
         var subjsen=curP!.enul()
         var tot=0
+        var mxtot=0 //to keep track of the current maxsubj ID
         for i in 0..<subjsen.count {
             if (subjsen[i].locc == .reg) {
+                print("Calculating for reg subject \(curP!.subjs[subjsen[i].ind].nm)")
                 var bs=curP!.scds[vws[tot].scsel.selectedSegmentIndex].base-curP!.subjs[subjsen[i].ind].lvls[vws[tot].lvlsel.selectedSegmentIndex].offset
                 bs=max(bs,0)
+                print("Base \(bs)")
                 bs*=curP!.subjs[subjsen[i].ind].lvls[vws[tot].lvlsel.selectedSegmentIndex].weight
+                print("Weight \(curP!.subjs[subjsen[i].ind].lvls[vws[tot].lvlsel.selectedSegmentIndex].weight)")
                 ans+=bs
                 ttlCred+=curP!.subjs[subjsen[i].ind].lvls[vws[tot].lvlsel.selectedSegmentIndex].weight
                 tot=tot+1
+                print()
             } else {
                 var selledInd=0
-                var mstrBs = -1.0
+                var mstrBs = -10.0
                 var selledtot=0
+                var hasAP=false
                 for j in 0..<curP!.mxSubs![subjsen[i].ind].subjs.count {
+                    if curP!.mxSubs![subjsen[i].ind].subjs[j].lvls[vws[tot+j].lvlsel.selectedSegmentIndex].name=="AP" {
+                        hasAP=true
+                        break
+                    }
+                }
+                for j in 0..<curP!.mxSubs![subjsen[i].ind].subjs.count {
+                    if hasAP&&curP!.mxSubs![subjsen[i].ind].subjs[j].lvls[vws[tot].lvlsel.selectedSegmentIndex].name != "AP" {
+                        tot=tot+1
+                        mxtot=mxtot+1
+                        continue
+                    }
                     var bs=curP!.scds[vws[tot].scsel.selectedSegmentIndex].base-curP!.mxSubs![subjsen[i].ind].subjs[j].lvls[vws[tot].lvlsel.selectedSegmentIndex].offset
                     bs=max(bs,0)
                     bs*=curP!.mxSubs![subjsen[i].ind].subjs[j].lvls[vws[tot].lvlsel.selectedSegmentIndex].weight
@@ -461,18 +510,126 @@ class ViewController: UIViewController {
                         selledtot=tot
                     }
                     tot=tot+1
+                    mxtot=mxtot+1
                 }
+                mstrBs=max(mstrBs,0)
                 ans+=mstrBs
                 ttlCred+=curP!.mxSubs![subjsen[i].ind].subjs[selledInd].lvls[vws[selledtot].lvlsel.selectedSegmentIndex].weight
+                let topC=17.0
+                let botC=Double(cellhei*curP!.mxSubs![subjsen[i].ind].subjs.count-15)
                 
-                for j in 0..<curP!.mxSubs![subjsen[i].ind].subjs.count {
-                    if (j != selledInd) {
-                        vws[tot-curP!.mxSubs![subjsen[i].ind].subjs.count+j].subjlbl.textColor=UIColor.init(named: "deselText")
-                    } else {
-                        vws[tot-curP!.mxSubs![subjsen[i].ind].subjs.count+j].subjlbl.textColor=UIColor.label
+                let offsetA=1.0/6
+                let offsetB=1.0/2
+                
+                let coordlvl=Double(selledInd*cellhei)+Double(cellhei)/2.0
+                let toptop=coordlvl-Double(cellhei)*(offsetA+offsetB)
+                let topbot=coordlvl-Double(cellhei)*offsetA
+                let bottop=coordlvl+Double(cellhei)*offsetA
+                let botbot=coordlvl+Double(cellhei)*(offsetA+offsetB)
+                
+                if lstmax[subjsen[i].ind] == -1 {
+                    for j in 0..<curP!.mxSubs![subjsen[i].ind].subjs.count {
+                        if (j != selledInd) {
+                            vws[tot-curP!.mxSubs![subjsen[i].ind].subjs.count+j].subjlbl.alpha=0
+                        } else {
+                            vws[tot-curP!.mxSubs![subjsen[i].ind].subjs.count+j].subjlbl.alpha=1
+                        }
                     }
+                    lstmax[subjsen[i].ind]=selledInd
+                    var upgradMsk=UIView(frame: CGRect(x: 0,y: 0,width: 4,height: coordlvl-topC))
+                    upgradMsk.backgroundColor = .black
+                    gradPos[subjsen[i].ind]=coordlvl
+                    lgradstop[subjsen[i].ind]!.mask=upgradMsk
+                    lgradstop[subjsen[i].ind]!.startLocation=Double(toptop-topC)/Double(botC-topC)
+                    lgradstop[subjsen[i].ind]!.endLocation=Double(topbot-topC)/Double(botC-topC)
+                    lgradsbot[subjsen[i].ind]!.startLocation=Double(bottop-topC)/Double(botC-topC)
+                    lgradsbot[subjsen[i].ind]!.endLocation=Double(botbot-topC)/Double(botC-topC)
                 }
-                //TODO: Updt this 
+                if lstmax[subjsen[i].ind] != selledInd {
+                    let alphaLstInd=mxtot-curP!.mxSubs![subjsen[i].ind].subjs.count+lstmax[subjsen[i].ind]
+                    let vwsLstInd=tot-curP!.mxSubs![subjsen[i].ind].subjs.count+lstmax[subjsen[i].ind]
+                    let alphaSelInd=mxtot-curP!.mxSubs![subjsen[i].ind].subjs.count+selledInd
+                    let vwsSelInd=tot-curP!.mxSubs![subjsen[i].ind].subjs.count+selledInd
+                                        
+                    //cancel all animations on the last one
+                    for j in 0..<alphTr[alphaLstInd].count {
+                        alphTr[alphaLstInd][j].cancel()
+                    }
+                    alphTr[alphaLstInd].removeAll()
+                    
+                    //cancel all animations on the current one
+                    for j in 0..<alphTr[mxtot-curP!.mxSubs![subjsen[i].ind].subjs.count+selledInd].count {
+                        alphTr[alphaSelInd][j].cancel()
+                    }
+                    alphTr[alphaSelInd].removeAll()
+                    
+                    //animate selledInd to 100% opacity and lstmax to 0
+                    
+                    let fps=120.0
+                    let totAdj=1.0
+                    let totTime=0.3
+                    
+                    let stops=Int(fps*totTime)
+                    let stopDur=totTime/Double(stops)
+                    
+                    //animate selledInd to 0%
+                    var curOpa=Int(vws[vwsSelInd].subjlbl.alpha*CGFloat(stops))
+                    
+                    for j in curOpa...stops {
+                        var wi=DispatchWorkItem(block: { [self] in
+                            vws[vwsSelInd].subjlbl.alpha+=CGFloat(totAdj/Double(stops))
+                        })
+                        alphTr[alphaSelInd].append(wi)
+                        DispatchQueue.main.asyncAfter(deadline: .now()+Double(j-curOpa)*stopDur, execute: wi)
+                    }
+                    
+                    //animate lstmax to 100
+                    curOpa=Int(vws[vwsLstInd].subjlbl.alpha*CGFloat(stops))
+                    for j in 0...curOpa {
+                        var wi=DispatchWorkItem(block: { [self] in
+                            vws[vwsLstInd].subjlbl.alpha-=CGFloat(totAdj/Double(stops))
+                        })
+                        alphTr[alphaLstInd].append(wi)
+                        DispatchQueue.main.asyncAfter(deadline: .now()+Double(j)*stopDur, execute: wi)
+                    }
+                    
+                    //TODO: Update the gradient too
+                    for j in 0..<gradTr[subjsen[i].ind].count {
+                        gradTr[subjsen[i].ind][j].cancel()
+                    }
+                    let ttTime=0.4
+                    let gradSpeed=Double(botC-topC)/ttTime //gradspeed - pixels/second
+                    
+                    // go to coordlvl
+                    var stps=Int(ceil(Double(abs(gradPos[subjsen[i].ind]-coordlvl))/gradSpeed*fps))
+                    for j in 0..<stps {
+                        var wi=DispatchWorkItem(block: { [self] in
+                            let toptopi=gradPos[subjsen[i].ind]-Double(cellhei)*(offsetA+offsetB)
+                            let topboti=gradPos[subjsen[i].ind]-Double(cellhei)*offsetA
+                            let bottopi=gradPos[subjsen[i].ind]+Double(cellhei)*offsetA
+                            let botboti=gradPos[subjsen[i].ind]+Double(cellhei)*(offsetA+offsetB)
+                            
+                            var upgradMsk=UIView(frame: CGRect(x: 0,y: 0,width: 4,height: gradPos[subjsen[i].ind]-topC))
+                            upgradMsk.backgroundColor = .black
+                            lgradstop[subjsen[i].ind]!.mask=upgradMsk
+                            lgradstop[subjsen[i].ind]!.startLocation=Double(toptopi-topC)/Double(botC-topC)
+                            lgradstop[subjsen[i].ind]!.endLocation=Double(topboti-topC)/Double(botC-topC)
+                            lgradsbot[subjsen[i].ind]!.startLocation=Double(bottopi-topC)/Double(botC-topC)
+                            lgradsbot[subjsen[i].ind]!.endLocation=Double(botboti-topC)/Double(botC-topC)
+                            
+                            if (gradPos[subjsen[i].ind]<coordlvl) {
+                                //go up
+                                gradPos[subjsen[i].ind]=min(gradPos[subjsen[i].ind]+gradSpeed/fps,coordlvl)
+                            } else {
+                                gradPos[subjsen[i].ind]=max(gradPos[subjsen[i].ind]-gradSpeed/fps,coordlvl)
+                            }
+                        })
+                        gradTr[subjsen[i].ind].append(wi)
+                        DispatchQueue.main.asyncAfter(deadline: .now()+Double(j)*ttTime/fps, execute: wi)
+                    }
+                    
+                    lstmax[subjsen[i].ind]=selledInd
+                }
             }
         }
         if (ttlCred != 0) {
