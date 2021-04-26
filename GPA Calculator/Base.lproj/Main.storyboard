@@ -184,7 +184,7 @@
                                 <rect key="frame" x="14" y="88" width="362" height="722"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lek-P9-PwM">
-                                        <rect key="frame" x="0.0" y="100.00000000000001" width="362" height="180.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="99.999999999999986" width="362" height="206.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About the Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-lA-OwY">
                                                 <rect key="frame" x="2" y="8" width="255" height="33.666666666666664"/>
@@ -192,28 +192,30 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUx-Gr-CG7">
-                                                <rect key="frame" x="0.0" y="44.666666666666664" width="362" height="105.66666666666669"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBv-oc-BUZ">
+                                                <rect key="frame" x="0.0" y="41.666666666666657" width="362" height="145"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">Hey there. I'm Michel and I love design and programming. I hope this app can help you in your journey as a student. Have any inquiries or suggestions? Add my WeChat with the ID _Michel_Guo_.</string>
                                                         <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="17"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" metaFont="system" size="18"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="9" lineHeightMultiple="1.2" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="mUx-Gr-CG7" firstAttribute="top" secondItem="Ueg-lA-OwY" secondAttribute="bottom" constant="3" id="H32-3m-9rU"/>
+                                            <constraint firstAttribute="trailing" secondItem="zBv-oc-BUZ" secondAttribute="trailing" id="0FF-9u-KI3"/>
+                                            <constraint firstAttribute="bottom" secondItem="zBv-oc-BUZ" secondAttribute="bottom" constant="20" id="J4S-hH-dck"/>
                                             <constraint firstItem="Ueg-lA-OwY" firstAttribute="leading" secondItem="Lek-P9-PwM" secondAttribute="leading" constant="2" id="ZHs-B4-3oA"/>
-                                            <constraint firstAttribute="trailing" secondItem="mUx-Gr-CG7" secondAttribute="trailing" id="dxT-IS-gVU"/>
-                                            <constraint firstAttribute="bottom" secondItem="mUx-Gr-CG7" secondAttribute="bottom" constant="30" id="soW-oy-hPd"/>
-                                            <constraint firstItem="mUx-Gr-CG7" firstAttribute="leading" secondItem="Lek-P9-PwM" secondAttribute="leading" id="tew-ka-Lvm"/>
+                                            <constraint firstItem="zBv-oc-BUZ" firstAttribute="top" secondItem="Ueg-lA-OwY" secondAttribute="bottom" id="lZt-LQ-0Ia"/>
                                             <constraint firstItem="Ueg-lA-OwY" firstAttribute="top" secondItem="Lek-P9-PwM" secondAttribute="top" constant="8" id="xYl-tZ-81b"/>
+                                            <constraint firstItem="zBv-oc-BUZ" firstAttribute="leading" secondItem="Lek-P9-PwM" secondAttribute="leading" id="zKq-9Q-MQh"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kjy-Lj-PqK">
@@ -238,8 +240,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0S-De-KOr">
                                                 <rect key="frame" x="0.0" y="45" width="362" height="55"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated Winter 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yb2-fC-Iwq">
-                                                        <rect key="frame" x="102.00000000000001" y="12" width="158.33333333333337" height="15.666666666666664"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated Spring 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yb2-fC-Iwq">
+                                                        <rect key="frame" x="103" y="12" width="156" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" name="subttl"/>
                                                         <nil key="highlightedColor"/>
@@ -292,7 +294,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="about" destination="mUx-Gr-CG7" id="AL3-2q-Pgx"/>
+                        <outlet property="about" destination="zBv-oc-BUZ" id="woc-6M-rnC"/>
                         <outlet property="mainStk" destination="kjy-Lj-PqK" id="aOL-Um-8AJ"/>
                     </connections>
                 </viewController>
@@ -343,6 +345,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

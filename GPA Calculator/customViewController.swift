@@ -50,7 +50,7 @@ public class Gradient: UIView {
 }
 var selP:preset?=nil
 class customViewController: UIViewController {
-    @IBOutlet weak var about: UILabel!
+    @IBOutlet weak var about: UITextView!
     var vwsa:[UIView]=[]
     var dsl = -1
     var prPrR=2
@@ -59,10 +59,10 @@ class customViewController: UIViewController {
     @IBOutlet weak var mainStk: UIStackView!
     var grads:[UIView]=[]
     override func viewDidLoad() {
+        about.backgroundColor=UIColor.clear
         about.textColor=UIColor.label
         selP=curP
         super.viewDidLoad()
-        var abtFont=UIFont.systemFont(ofSize: 16, weight: .medium)
         var loves=["Maxie","Mimi","Sarah","Sophie"]
         loves.shuffle()
         var lovesStr=loves[0]
@@ -73,7 +73,7 @@ class customViewController: UIViewController {
             }
             lovesStr+=loves[i]
         }
-        about.text!+=" Special thanks to "+lovesStr+" for supporting my journey as a developer!"
+        about.text!+=" Special thanks to "+lovesStr+" for supporting my journey as a developer!\nThis project is now open source on GitHub! github.com/LegitMichel777/GPA-Calculator"
         navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view.
         var mstrGrps=Int(ceil(Double(presets.count)/Double(prPrR)))
