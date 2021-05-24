@@ -231,7 +231,7 @@ func initPresets() {
 //    tmp.subjs[3].lvls[3].weight=4
     tmp.subjs[3].lvls.remove(at:3)
     tmp.subjs.append(fastSubj(stype:"",name:"Elective 2",weigh:3))
-    tmp.subjs[4  ].lvls.remove(at:1)
+    tmp.subjs[4].lvls.remove(at:1)
 //    tmp.subjs[4].lvls[3].weight=4
     tmp.subjs[4].lvls.remove(at:3)
     tmp.subjs.append(fastSubj(stype:"chi",name:"Chinese",weigh:3))
@@ -244,8 +244,10 @@ func initPresets() {
     tmp.subjs[7].lvls.remove(at:3)
     presets.append(tmp);
     
+    tmp2=fastSubj(stype: "", name: "Math", weigh: 6)
+    tmp2.lvls.remove(at: 1)
     tmp=preset(id: "stockshsidgrade11-2m2-1m3",name:"Grade 11", subttl:"1x M1, 2x M2s", subjs: [], scds: ascl)
-    tmp.subjs.append(fastSubj(stype:"",name:"Math",weigh:6))
+    tmp.subjs.append(tmp2)
     tmp.subjs.append(fastSubj(stype:"eng",name:"English",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 2",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 2",weigh:4.5))
@@ -254,7 +256,7 @@ func initPresets() {
     presets.append(tmp);
     
     tmp=preset(id: "stockshsidgrade11-1m2-1m3-1m45",name:"Grade 11", subttl:"1x M2, M3, M4/5", subjs: [], scds: ascl)
-    tmp.subjs.append(fastSubj(stype:"",name:"Math",weigh:6))
+    tmp.subjs.append(tmp2)
     tmp.subjs.append(fastSubj(stype:"eng",name:"English",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 2",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 3",weigh:4.5))
@@ -263,7 +265,7 @@ func initPresets() {
     presets.append(tmp);
     
     tmp=preset(id: "stockshsidgrade11-1m2-1m3-1m4-1m5",name:"Grade 11", subttl:"1x M2, M3, M4, M5", subjs: [], scds: ascl)
-    tmp.subjs.append(fastSubj(stype:"",name:"Math",weigh:6))
+    tmp.subjs.append(tmp2)
     tmp.subjs.append(fastSubj(stype:"eng",name:"English",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 2",weigh:6))
     tmp.subjs.append(fastSubj(stype:"",name:"Module 3",weigh:4.5))
