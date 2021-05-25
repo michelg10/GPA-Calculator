@@ -15,6 +15,7 @@
 		F0AB3310255AD551007D7601 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0AB330E255AD551007D7601 /* LaunchScreen.storyboard */; };
 		F0AB331B255AD551007D7601 /* GPA_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AB331A255AD551007D7601 /* GPA_CalculatorTests.swift */; };
 		F0AB3326255AD551007D7601 /* GPA_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AB3325255AD551007D7601 /* GPA_CalculatorUITests.swift */; };
+		F0CE7A72265BC1AC0022A1BD /* tfPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CE7A71265BC1AC0022A1BD /* tfPromotionView.swift */; };
 		F0E4F618256101E3005E3108 /* customViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F617256101E3005E3108 /* customViewController.swift */; };
 		F0E4F61D2561105A005E3108 /* presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F61C2561105A005E3108 /* presets.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		F0AB3321255AD551007D7601 /* GPA CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GPA CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AB3325255AD551007D7601 /* GPA_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPA_CalculatorUITests.swift; sourceTree = "<group>"; };
 		F0AB3327255AD551007D7601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0CE7A71265BC1AC0022A1BD /* tfPromotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tfPromotionView.swift; sourceTree = "<group>"; };
 		F0E4F6132560E9CA005E3108 /* GPA Calculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GPA Calculator.entitlements"; sourceTree = "<group>"; };
 		F0E4F617256101E3005E3108 /* customViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customViewController.swift; sourceTree = "<group>"; };
 		F0E4F61C2561105A005E3108 /* presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presets.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				F0E4F61C2561105A005E3108 /* presets.swift */,
 				F0E4F617256101E3005E3108 /* customViewController.swift */,
 				F0AB330C255AD551007D7601 /* Assets.xcassets */,
+				F0CE7A71265BC1AC0022A1BD /* tfPromotionView.swift */,
 				F0AB330E255AD551007D7601 /* LaunchScreen.storyboard */,
 				F0AB3311255AD551007D7601 /* Info.plist */,
 			);
@@ -270,6 +273,7 @@
 				F0AB3308255AD54F007D7601 /* ViewController.swift in Sources */,
 				F0AB3304255AD54F007D7601 /* AppDelegate.swift in Sources */,
 				F0AB3306255AD54F007D7601 /* SceneDelegate.swift in Sources */,
+				F0CE7A72265BC1AC0022A1BD /* tfPromotionView.swift in Sources */,
 				F0E4F618256101E3005E3108 /* customViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
