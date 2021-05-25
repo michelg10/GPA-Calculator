@@ -297,6 +297,7 @@
                     <connections>
                         <outlet property="about" destination="zBv-oc-BUZ" id="woc-6M-rnC"/>
                         <outlet property="mainStk" destination="kjy-Lj-PqK" id="aOL-Um-8AJ"/>
+                        <outlet property="masterStack" destination="nx4-qD-LfZ" id="k0D-Cn-nFz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7K-8u-dkC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

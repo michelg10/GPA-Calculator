@@ -51,7 +51,7 @@ struct tfPromotionView: View {
                     
             }.background(Color.init("promotionFloat"))
             .cornerRadius(22)
-        }
+        }.padding(.bottom,15)
     }
 }
 

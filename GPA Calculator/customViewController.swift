@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 @IBDesignable
 public class Gradient: UIView {
@@ -57,6 +58,7 @@ class customViewController: UIViewController {
     var marg=13
     var enterID:String=""
     @IBOutlet weak var mainStk: UIStackView!
+    @IBOutlet var masterStack: UIStackView!
     var grads:[UIView]=[]
     override func viewDidLoad() {
         about.backgroundColor=UIColor.clear
@@ -175,6 +177,12 @@ class customViewController: UIViewController {
                 mainStk.insertArrangedSubview(plcv,at:i*2+2)
             }
         }
+        let swiftuiview=tfPromotionView()
+        let hostingController=UIHostingController(rootView: swiftuiview)
+        addChild(hostingController)
+        masterStack.insertArrangedSubview(hostingController.view, at: 1)
+        
+        hostingController.view.translatesAutoresizingMaskIntoConstraints=false
     }
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
