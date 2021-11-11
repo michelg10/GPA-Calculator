@@ -33,6 +33,10 @@ struct tfPromotionView: View {
                 HStack(spacing:0) {
                     Spacer()
                     if #available(iOS 14.0, *) {
+                        #if targetEnvironment(macCatalyst)
+                        Text("App not available on macOS")
+                            .font(.system(size: 18, weight: .medium, design: .default))
+                        #else
                         Link(destination: URL(string: "https://apps.apple.com/cn/app/24-points-by-michel/id1555800877?l=en")!, label: {
                             Text("View on the App Store")
                                 .font(.system(size: 18, weight: .medium, design: .default))
@@ -42,6 +46,7 @@ struct tfPromotionView: View {
                                 .background(Color.blue)
                                 .cornerRadius(12, antialiased: true)
                         })
+                        #endif
                     } else {
                         Text("App not available on iOS 13")
                             .font(.system(size: 18, weight: .medium, design: .default))
@@ -52,6 +57,7 @@ struct tfPromotionView: View {
             }.background(Color.init("promotionFloat"))
             .cornerRadius(22)
         }.padding(.bottom,15)
+        .padding(.top,10)
     }
 }
 

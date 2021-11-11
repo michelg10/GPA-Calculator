@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oyf-Tn-n9j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oyf-Tn-n9j">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -161,11 +161,11 @@
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="editmsk" destination="qDk-mO-hWV" id="kwH-es-xD4"/>
-                        <outlet property="res" destination="Wlg-Am-XFs" id="lJM-su-Xwq"/>
-                        <outlet property="resetmsk" destination="yxY-49-i9t" id="XBJ-Zq-cAI"/>
-                        <outlet property="scrview" destination="Blf-kn-KZ2" id="f6X-2N-aXg"/>
-                        <outlet property="stk" destination="jDI-vl-ARh" id="qAh-vC-mo4"/>
+                        <outlet property="calculationResultDisplayView" destination="Wlg-Am-XFs" id="lJM-su-Xwq"/>
+                        <outlet property="editButtonRoundedRectMask" destination="qDk-mO-hWV" id="kwH-es-xD4"/>
+                        <outlet property="mainScrollView" destination="Blf-kn-KZ2" id="f6X-2N-aXg"/>
+                        <outlet property="mainSubjectsStack" destination="jDI-vl-ARh" id="qAh-vC-mo4"/>
+                        <outlet property="resetButtonRoundedRectMask" destination="yxY-49-i9t" id="XBJ-Zq-cAI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -181,7 +181,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-sO-bSp">
-                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="756"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nx4-qD-LfZ">
                                         <rect key="frame" x="14" y="0.0" width="362" height="306.66666666666669"/>
@@ -287,7 +287,7 @@
                             <constraint firstItem="Koe-sO-bSp" firstAttribute="leading" secondItem="u7b-6o-r0m" secondAttribute="leading" id="KC0-UG-KPk"/>
                             <constraint firstItem="u7b-6o-r0m" firstAttribute="trailing" secondItem="Koe-sO-bSp" secondAttribute="trailing" id="aGb-be-VwK"/>
                             <constraint firstItem="Koe-sO-bSp" firstAttribute="top" secondItem="u7b-6o-r0m" secondAttribute="top" id="fu0-Dl-ThA"/>
-                            <constraint firstItem="u7b-6o-r0m" firstAttribute="bottom" secondItem="Koe-sO-bSp" secondAttribute="bottom" id="mOJ-at-WhE"/>
+                            <constraint firstAttribute="bottom" secondItem="Koe-sO-bSp" secondAttribute="bottom" id="mOJ-at-WhE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Customize" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="c62-RZ-kEO">
@@ -352,7 +352,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

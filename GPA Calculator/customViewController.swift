@@ -49,7 +49,7 @@ public class Gradient: UIView {
     }
 
 }
-var selP:preset?=nil
+var selP:Preset?=nil
 class customViewController: UIViewController {
     @IBOutlet weak var about: UITextView!
     var vwsa:[UIView]=[]
@@ -63,7 +63,7 @@ class customViewController: UIViewController {
     override func viewDidLoad() {
         about.backgroundColor=UIColor.clear
         about.textColor=UIColor.label
-        selP=curP
+        selP=currentPreset
         super.viewDidLoad()
         var loves=["Maxie","Mimi","Sarah","Sophie"]
         loves.shuffle()
@@ -137,14 +137,14 @@ class customViewController: UIViewController {
                     
                     var subttllbl=UILabel();
                     subttllbl.translatesAutoresizingMaskIntoConstraints=false
-                    if (presets[i*prPrR+j].subttl==nil) {
-                        if (presets[i*prPrR+j].subjs.count==1) {
+                    if (presets[i*prPrR+j].subtitle==nil) {
+                        if (presets[i*prPrR+j].subjects.count==1) {
                             subttllbl.text="1 subject"
                         } else {
-                            subttllbl.text=String(presets[i*prPrR+j].subjs.count)+" subjects"
+                            subttllbl.text=String(presets[i*prPrR+j].subjects.count)+" subjects"
                         }
                     } else {
-                        subttllbl.text=presets[i*prPrR+j].subttl!
+                        subttllbl.text=presets[i*prPrR+j].subtitle!
                     }
                     subttllbl.font=UIFont.systemFont(ofSize: 14, weight: .regular)
                     ivw.addSubview(subttllbl)
@@ -179,6 +179,7 @@ class customViewController: UIViewController {
         }
         let swiftuiview=tfPromotionView()
         let hostingController=UIHostingController(rootView: swiftuiview)
+        hostingController.view.backgroundColor = .clear
         addChild(hostingController)
         masterStack.insertArrangedSubview(hostingController.view, at: 1)
         
@@ -188,8 +189,8 @@ class customViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-        if (curP!.id != selP!.id) {
-            curP=selP
+        if (currentPreset!.id != selP!.id) {
+            currentPreset=selP
             NotificationCenter.default.post(name: Notification.Name("updtPre"), object: nil)
         }
     }
