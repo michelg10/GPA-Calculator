@@ -56,7 +56,7 @@
                                                                                     <color key="titleColor" systemColor="labelColor"/>
                                                                                 </state>
                                                                                 <connections>
-                                                                                    <action selector="editwei:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9e8-2g-FkD"/>
+                                                                                    <action selector="editWeight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byu-7o-DAS"/>
                                                                                     <segue destination="AhO-TU-mkq" kind="show" id="QFH-5X-dJe"/>
                                                                                 </connections>
                                                                             </button>

@@ -209,37 +209,52 @@ func initPresets() {
     tmp.subjects[7].levels.remove(at:3)
     presets.append(tmp);
     
-    tmp2=fastSubj(stype: "", name: "Math", weigh: 6)
-    tmp2.levels.remove(at: 1)
-    tmp=Preset(id: "stockshsidgrade11-2m2-1m3",name:"Grade 11", subtitle:"1x M1, 2x M2s", subjects: [], defaultScoreToBaseGPAMap: defaultScoreToBaseGPAMap)
-    tmp.subjects.append(tmp2)
+    var g11nonIbMath=fastSubj(stype: "", name: "Math", weigh: 6)
+    g11nonIbMath.levels.remove(at: 1)
+    g11nonIbMath.levels[g11nonIbMath.levels.count-1].name="A-L/AP"
+    var g11nonIbChinese=fastSubj(stype: "chi", name: "Chinese", weigh: 3)
+    g11nonIbChinese.levels[2].name="S/5-7"
+    var g11Module2=fastSubj(stype:"",name:"Module 2",weigh:6)
+    g11Module2.levels[g11Module2.levels.count-1].name="A-L/AP"
+    var g11Module3=fastSubj(stype:"",name:"Module 3",weigh:4.5)
+    g11Module3.levels.insert(.init(name: "A-L", weight: 6.0, offset: 0.0), at: 3)
+    var g11Module45=fastSubj(stype: "", name: "Module 4/5", weigh: 3.0)
+    g11Module45.levels.removeLast()
+    var g11Module4=g11Module45
+    g11Module4.name="Module 4"
+    g11Module45.levels.append(.init(name: "A-L", weight: 6.0, offset: 0.0))
+    g11Module45.levels.append(.init(name: "AP", weight: 4.5, offset: 0.0))
+    var g11Module5=g11Module45
+    g11Module5.name="Module 5"
+    tmp=Preset(id: "stockshsidgrade11-2m2-1m3",name:"Grade 11", subtitle:"2x M2s, 1x M3", subjects: [], defaultScoreToBaseGPAMap: defaultScoreToBaseGPAMap)
+    tmp.subjects.append(g11nonIbMath)
     tmp.subjects.append(fastSubj(stype:"eng",name:"English",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 2",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 2",weigh:4.5))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 3",weigh:4.5))
-    tmp.subjects.append(fastSubj(stype:"chi",name:"Chinese",weigh:3))
+    tmp.subjects.append(g11Module2)
+    tmp.subjects.append(g11Module2)
+    tmp.subjects.append(g11Module3)
+    tmp.subjects.append(g11nonIbChinese)
     presets.append(tmp);
     
     tmp=Preset(id: "stockshsidgrade11-1m2-1m3-1m45",name:"Grade 11", subtitle:"1x M2, M3, M4/5", subjects: [], defaultScoreToBaseGPAMap: defaultScoreToBaseGPAMap)
-    tmp.subjects.append(tmp2)
+    tmp.subjects.append(g11nonIbMath)
     tmp.subjects.append(fastSubj(stype:"eng",name:"English",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 2",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 3",weigh:4.5))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 4/5",weigh:4.5))
-    tmp.subjects.append(fastSubj(stype:"chi",name:"Chinese",weigh:3))
+    tmp.subjects.append(g11Module2)
+    tmp.subjects.append(g11Module3)
+    tmp.subjects.append(g11Module45)
+    tmp.subjects.append(g11nonIbChinese)
     presets.append(tmp);
     
     tmp=Preset(id: "stockshsidgrade11-1m2-1m3-1m4-1m5",name:"Grade 11", subtitle:"1x M2, M3, M4, M5", subjects: [], defaultScoreToBaseGPAMap: defaultScoreToBaseGPAMap)
-    tmp.subjects.append(tmp2)
+    tmp.subjects.append(g11nonIbMath)
     tmp.subjects.append(fastSubj(stype:"eng",name:"English",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 2",weigh:6))
-    tmp.subjects.append(fastSubj(stype:"",name:"Module 3",weigh:4.5))
-    tmp.subjects.append(fastSubj(stype:"chi",name:"Chinese",weigh:4.5))
+    tmp.subjects.append(g11Module2)
+    tmp.subjects.append(g11Module3)
+    tmp.subjects.append(g11nonIbChinese)
     
     var mxGrp:[maxSubjectGroup]=[]
     var tmp3:[Subject]=[]
-    tmp3.append(fastSubj(stype:"", name:"Module 4", weigh:3))
-    tmp3.append(fastSubj(stype:"", name:"Module 5", weigh:3))
+    tmp3.append(g11Module4)
+    tmp3.append(g11Module5)
     mxGrp.append(maxSubjectGroup(insertAt:4,subjects: tmp3))
     
     tmp.maxSubjectGroups=mxGrp
@@ -266,6 +281,12 @@ func initPresets() {
     letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A-", baseGPA: 4.2))
     letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A/A+", baseGPA: 4.5))
     
+    var earlyToKGradesToBaseGPAMap:[ScoreToBaseGPAMap]=[]
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"F", baseGPA: 0))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"C", baseGPA: 2.5))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"B", baseGPA: 4.0))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A", baseGPA: 4.5))
+    
     tmp=Preset(id: "stockshsidgrade11-ib",name:"Grade 11", subtitle:"IB", subjects: [], defaultScoreToBaseGPAMap: ibScoreToBaseGPAMap)
     tmp.subjects.append(fastSubj(stype:"",name:"Math",weigh:1))
     tmp.subjects.append(fastSubj(stype:"eng",name:"English",weigh:1))
@@ -277,6 +298,7 @@ func initPresets() {
         tmp.subjects[i].levels = [.init(name: "IB", weight: 1, offset: 0)]
     }
     tmp.subjects.append(fastSubj(stype: "", name: "ToK", weigh: 0.5))
+    tmp.subjects[tmp.subjects.count-1].customScoreToBaseGPAMap=earlyToKGradesToBaseGPAMap
     tmp.subjects[tmp.subjects.count-1].levels = [.init(name: "IB", weight: 0.5, offset: 0)]
     presets.append(tmp);
 }

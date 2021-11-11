@@ -295,8 +295,9 @@ class ViewController: UIViewController {
                     amx.scoreSelect=scsel
                     scsel.apportionsSegmentWidthsByContent=true
                     scsel.translatesAutoresizingMaskIntoConstraints=false
-                    for k in 0..<currentPreset!.defaultScoreToBaseGPAMap.count {
-                        scsel.insertSegment(withTitle: String(currentPreset!.defaultScoreToBaseGPAMap[k].name), at: k, animated: false)
+                    let scoreToBaseGPAMap = currentPreset!.maxSubjectGroups![currentSubjectComponents[i].index].subjects[j].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap
+                    for k in 0..<scoreToBaseGPAMap.count {
+                        scsel.insertSegment(withTitle: String(scoreToBaseGPAMap[k].name), at: k, animated: false)
                     }
                     subjcont.addSubview(scsel)
                     scsel.selectedSegmentIndex=0
@@ -406,8 +407,9 @@ class ViewController: UIViewController {
             var scsel=UISegmentedControl()
             scsel.apportionsSegmentWidthsByContent=true
             scsel.translatesAutoresizingMaskIntoConstraints=false
-            for j in 0..<currentPreset!.defaultScoreToBaseGPAMap.count {
-                scsel.insertSegment(withTitle: String(currentPreset!.defaultScoreToBaseGPAMap[j].name), at: j, animated: false)
+            let scoreToBaseGPAMap = currentPreset!.subjects[currentSubjectComponents[i].index].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap
+            for j in 0..<scoreToBaseGPAMap.count {
+                scsel.insertSegment(withTitle: String(scoreToBaseGPAMap[j].name), at: j, animated: false)
             }
             mstr.addSubview(scsel)
             scsel.selectedSegmentIndex=0
