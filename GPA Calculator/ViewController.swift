@@ -459,7 +459,8 @@ class ViewController: UIViewController {
         for i in 0..<subjsen.count {
             if (subjsen[i].type == .regular) {
                 print("Calculating for reg subject \(currentPreset!.subjects[subjsen[i].index].name)")
-                var bs=currentPreset!.defaultScoreToBaseGPAMap[subjectViews[tot].scoreSelect.selectedSegmentIndex].baseGPA-currentPreset!.subjects[subjsen[i].index].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].offset
+                let scoreToBaseGPAMap=currentPreset!.subjects[subjsen[i].index].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap;
+                var bs=scoreToBaseGPAMap[subjectViews[tot].scoreSelect.selectedSegmentIndex].baseGPA-currentPreset!.subjects[subjsen[i].index].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].offset
                 bs=max(bs,0)
                 print("Base \(bs)")
                 bs*=currentPreset!.subjects[subjsen[i].index].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].weight
@@ -485,7 +486,8 @@ class ViewController: UIViewController {
                         mxtot=mxtot+1
                         continue
                     }
-                    var bs=currentPreset!.defaultScoreToBaseGPAMap[subjectViews[tot].scoreSelect.selectedSegmentIndex].baseGPA-currentPreset!.maxSubjectGroups![subjsen[i].index].subjects[j].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].offset
+                    let scoreToBaseGPAMap=currentPreset!.maxSubjectGroups![subjsen[i].index].subjects[j].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap;
+                    var bs=scoreToBaseGPAMap[subjectViews[tot].scoreSelect.selectedSegmentIndex].baseGPA-currentPreset!.maxSubjectGroups![subjsen[i].index].subjects[j].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].offset
                     bs=max(bs,0)
                     bs*=currentPreset!.maxSubjectGroups![subjsen[i].index].subjects[j].levels[subjectViews[tot].levelSelect.selectedSegmentIndex].weight
                     if (mstrBs<bs&&abs(mstrBs-bs)>0.00001) {
