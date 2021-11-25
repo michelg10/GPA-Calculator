@@ -195,13 +195,13 @@ func initPresets() {
     tmp.subjects[0].levels.remove(at:3)
     tmp.subjects.append(fastSubj(stype:"eng",name:"English",weigh:5.5))
     tmp.subjects.append(fastSubj(stype:"",name:"History",weigh:4))
-//    tmp.subjs[2].lvls[3].weight=5
+    tmp.subjects[2].levels[3].weight=5
     tmp.subjects.append(fastSubj(stype:"",name:"Elective 1",weigh:3))
     tmp.subjects[3].levels.remove(at:1)
-//    tmp.subjs[3].lvls[3].weight=4
+    tmp.subjects[3].levels[2].weight=4
     tmp.subjects.append(fastSubj(stype:"",name:"Elective 2",weigh:3))
     tmp.subjects[4].levels.remove(at:1)
-//    tmp.subjs[4].lvls[3].weight=4
+    tmp.subjects[4].levels[2].weight=4
     tmp.subjects.append(fastSubj(stype:"chi",name:"Chinese",weigh:3))
     tmp.subjects.append(fastSubj(stype:"",name:"Chemistry",weigh:3))
     tmp.subjects[6].levels.remove(at:3)
