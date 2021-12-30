@@ -1,5 +1,6 @@
 struct ScoreToBaseGPAMap {
-    var name:String
+    var percentageName:String
+    var letterName:String
     var baseGPA:Double
 }
 struct Components {
@@ -58,14 +59,14 @@ func fastSubj(stype: String,name: String, weigh: Double) -> Subject { // purely 
 }
 func initPresets() {
     var defaultScoreToBaseGPAMap:[ScoreToBaseGPAMap]=[]
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"0", baseGPA: 0))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"60", baseGPA: 2.6))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"68", baseGPA: 3.0))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"73", baseGPA: 3.3))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"78", baseGPA: 3.6))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"83", baseGPA: 3.9))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"88", baseGPA: 4.2))
-    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"93", baseGPA: 4.5))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"0", letterName: "F", baseGPA: 0))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"60", letterName: "C/C-", baseGPA: 2.6))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"68", letterName: "C+", baseGPA: 3.0))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"73", letterName: "B-", baseGPA: 3.3))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"78", letterName: "B", baseGPA: 3.6))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"83", letterName: "B+", baseGPA: 3.9))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"88", letterName: "A-", baseGPA: 4.2))
+    defaultScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"93", letterName: "A/A+", baseGPA: 4.5))
     
     var tmp=Preset(id:"stockshsidgrade6",name:"Grade 6", subjects: [], defaultScoreToBaseGPAMap:defaultScoreToBaseGPAMap)
     var tmp2=fastSubj(stype: "eng", name: "English", weigh: 6.5)
@@ -262,30 +263,30 @@ func initPresets() {
     presets.append(tmp);
     
     var ibScoreToBaseGPAMap:[ScoreToBaseGPAMap]=[]
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"F", baseGPA: 0))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"H4", baseGPA: 2.6))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"L5", baseGPA: 3.0))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"H5", baseGPA: 3.3))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"L6", baseGPA: 3.6))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"H6", baseGPA: 3.9))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"L7", baseGPA: 4.2))
-    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"H7", baseGPA: 4.5))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"F", letterName: "F", baseGPA: 0))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"H4", letterName: "C/C-", baseGPA: 2.6))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"L5", letterName: "C+", baseGPA: 3.0))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"H5", letterName: "B-", baseGPA: 3.3))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"L6", letterName: "B", baseGPA: 3.6))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"H6", letterName: "B+", baseGPA: 3.9))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"L7", letterName: "A-", baseGPA: 4.2))
+    ibScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"H7", letterName: "A/A+", baseGPA: 4.5))
     
-    var letterGradesScoreToBaseGPAMap:[ScoreToBaseGPAMap]=[]
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"F", baseGPA: 0))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"C-/C", baseGPA: 2.6))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"C+", baseGPA: 3.0))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"B-", baseGPA: 3.3))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"B", baseGPA: 3.6))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"B+", baseGPA: 3.9))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A-", baseGPA: 4.2))
-    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A/A+", baseGPA: 4.5))
+//    var letterGradesScoreToBaseGPAMap:[ScoreToBaseGPAMap]=[]
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"F", baseGPA: 0))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"C-/C", baseGPA: 2.6))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"C+", baseGPA: 3.0))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"B-", baseGPA: 3.3))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"B", baseGPA: 3.6))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"B+", baseGPA: 3.9))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"A-", baseGPA: 4.2))
+//    letterGradesScoreToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"A/A+", baseGPA: 4.5))
     
     var earlyToKGradesToBaseGPAMap:[ScoreToBaseGPAMap]=[]
-    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"F", baseGPA: 0))
-    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"C", baseGPA: 2.5))
-    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"B", baseGPA: 4.0))
-    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(name:"A", baseGPA: 4.5))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"F", letterName: "F", baseGPA: 0))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"C", letterName: "C", baseGPA: 2.5))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"B", letterName: "B", baseGPA: 4.0))
+    earlyToKGradesToBaseGPAMap.append(ScoreToBaseGPAMap(percentageName:"A", letterName: "A", baseGPA: 4.5))
     
     tmp=Preset(id: "stockshsidgrade11-ib",name:"Grade 11", subtitle:"IB", subjects: [], defaultScoreToBaseGPAMap: ibScoreToBaseGPAMap)
     tmp.subjects.append(fastSubj(stype:"",name:"Math",weigh:1))

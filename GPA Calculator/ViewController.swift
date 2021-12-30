@@ -33,6 +33,11 @@ struct maxSubjectGroup {
     var insertAt:Int
     var subjects:[Subject]
 }
+enum ScoreDisplay {
+    case percentage
+    case letter
+}
+var scoreDisplay = ScoreDisplay.percentage
 var currentPreset:Preset?
 var lgradstop:[Gradient?]=[] // lgrad
 var lgradsbot:[Gradient?]=[] // lgrad
@@ -81,7 +86,13 @@ class ViewController: UIViewController {
             let domain = Bundle.main.bundleIdentifier!
             UserDefaults.standard.removePersistentDomain(forName: domain)
             UserDefaults.standard.synchronize()
+            
             userData.setValue(currentPreset?.id,forKey:"preset")
+            if scoreDisplay == .percentage {
+                userData.setValue("percentage", forKey: "scoreDisplayMode")
+            } else if scoreDisplay == .letter {
+                userData.setValue("letter", forKey: "scoreDisplayMode")
+            }
             let saveBits=currentPreset!.getComponents()
             var tot=0
             for i in 0..<saveBits.count {
@@ -104,11 +115,11 @@ class ViewController: UIViewController {
         }
     }
     let userData=UserDefaults.standard
-    @objc func updtPre() {
+    @objc func updatePreset() {
         drawUI(doSave:true)
     }
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updtPre), name: Notification.Name("updtPre"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePreset), name: Notification.Name("updatePreset"), object: nil)
         initPresets()
         self.navigationController?.navigationBar.prefersLargeTitles=true
         calculationResultDisplayView.text=""
@@ -164,6 +175,14 @@ class ViewController: UIViewController {
                 } else {
                     subjectViews[i].levelSelect.selectedSegmentIndex=0
                     subjectViews[i].scoreSelect.selectedSegmentIndex=0
+                }
+            }
+            var scoreDisplayModeString = userData.value(forKey: "scoreDisplayMode")
+            if (scoreDisplayModeString != nil) {
+                if (scoreDisplayModeString as! String == "percentage") {
+                    scoreDisplay = .percentage
+                } else if (scoreDisplayModeString as! String == "letter") {
+                    scoreDisplay = .letter
                 }
             }
             recomputeGPA(segment:nil)
@@ -297,7 +316,7 @@ class ViewController: UIViewController {
                     scsel.translatesAutoresizingMaskIntoConstraints=false
                     let scoreToBaseGPAMap = currentPreset!.maxSubjectGroups![currentSubjectComponents[i].index].subjects[j].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap
                     for k in 0..<scoreToBaseGPAMap.count {
-                        scsel.insertSegment(withTitle: String(scoreToBaseGPAMap[k].name), at: k, animated: false)
+                        scsel.insertSegment(withTitle: (scoreDisplay == .percentage ? scoreToBaseGPAMap[k].percentageName : scoreToBaseGPAMap[k].letterName), at: k, animated: false)
                     }
                     subjcont.addSubview(scsel)
                     scsel.selectedSegmentIndex=0
@@ -409,7 +428,7 @@ class ViewController: UIViewController {
             scsel.translatesAutoresizingMaskIntoConstraints=false
             let scoreToBaseGPAMap = currentPreset!.subjects[currentSubjectComponents[i].index].customScoreToBaseGPAMap ?? currentPreset!.defaultScoreToBaseGPAMap
             for j in 0..<scoreToBaseGPAMap.count {
-                scsel.insertSegment(withTitle: String(scoreToBaseGPAMap[j].name), at: j, animated: false)
+                scsel.insertSegment(withTitle: (scoreDisplay == .percentage ? scoreToBaseGPAMap[j].percentageName : scoreToBaseGPAMap[j].letterName), at: j, animated: false)
             }
             mstr.addSubview(scsel)
             scsel.selectedSegmentIndex=0

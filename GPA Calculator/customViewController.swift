@@ -51,7 +51,7 @@ public class Gradient: UIView {
 }
 var selP:Preset?=nil
 class customViewController: UIViewController {
-    @IBOutlet weak var about: UITextView!
+    @IBOutlet weak var scoreSelectionControl: UISegmentedControl!
     var vwsa:[UIView]=[]
     var dsl = -1
     var prPrR=2
@@ -61,21 +61,13 @@ class customViewController: UIViewController {
     @IBOutlet var masterStack: UIStackView!
     var grads:[UIView]=[]
     override func viewDidLoad() {
-        about.backgroundColor=UIColor.clear
-        about.textColor=UIColor.label
         selP=currentPreset
-        super.viewDidLoad()
-        var loves=["Maxie","Mimi","Sarah","Sophie"]
-        loves.shuffle()
-        var lovesStr=loves[0]
-        for i in 1..<loves.count {
-            lovesStr+=", "
-            if (i==loves.count-1) {
-                lovesStr+="and "
-            }
-            lovesStr+=loves[i]
+        if scoreDisplay == .percentage {
+            scoreSelectionControl.selectedSegmentIndex = 0
+        } else {
+            scoreSelectionControl.selectedSegmentIndex = 1
         }
-        about.text!+=" Special thanks to "+lovesStr+" for supporting my journey as a developer!\nThis project is now open source on GitHub! github.com/LegitMichel777/GPA-Calculator"
+        super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view.
         var mstrGrps=Int(ceil(Double(presets.count)/Double(prPrR)))
@@ -181,7 +173,7 @@ class customViewController: UIViewController {
         let hostingController=UIHostingController(rootView: swiftuiview)
         hostingController.view.backgroundColor = .clear
         addChild(hostingController)
-        masterStack.insertArrangedSubview(hostingController.view, at: 1)
+        masterStack.insertArrangedSubview(hostingController.view, at: 2)
         
         hostingController.view.translatesAutoresizingMaskIntoConstraints=false
     }
@@ -189,10 +181,17 @@ class customViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-        if (currentPreset!.id != selP!.id) {
-            currentPreset=selP
-            NotificationCenter.default.post(name: Notification.Name("updtPre"), object: nil)
+        currentPreset=selP
+        if (scoreSelectionControl.selectedSegmentIndex == 0) {
+            scoreDisplay = .percentage
+        } else {
+            scoreDisplay = .letter
         }
+        NotificationCenter.default.post(name: Notification.Name("updatePreset"), object: nil)
+    }
+    @IBAction func scoreSelectionChanged(_ sender: Any) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
     }
     /*
     // MARK: - Navigation
